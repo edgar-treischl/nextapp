@@ -27,19 +27,19 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      # 4️⃣ Build Next.js app (SSG)
+      # 4️⃣ Build Next.js app (Static export)
       - name: Build Next.js app
         run: yarn build
 
       # 5️⃣ Disable Jekyll (required for GitHub Pages)
       - name: Disable Jekyll
-        run: touch out/.nojekyll
+        run: touch out/nextapp/.nojekyll
 
       # 6️⃣ Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-          # Optional: use a custom branch
+          publish_dir: ./out/nextapp   # ✅ Exported folder with basePath
+          # Optional: custom branch
           # publish_branch: gh-pages
