@@ -1,5 +1,0 @@
-1:"$Sreact.fragment"
-2:I[97367,["/nextapp/_next/static/chunks/42879de7b8087bc9.js"],"OutletBoundary"]
-3:"$Sreact.suspense"
-0:{"buildId":"utVBcH-iiqIks_Y_ZyG-p","rsc":["$","$1","c",{"children":[["$","section",null,{"className":"container mx-auto py-20 px-6","children":[["$","h2",null,{"className":"text-4xl font-bold mb-6","children":"About Us"}],["$","p",null,{"className":"text-lg text-gray-700","children":"This is a simple modern website built with Next.js 13 and Tailwind CSS. You can use it as a starting point for landing pages, dashboards, or data apps."}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
-4:null
