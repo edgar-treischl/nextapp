@@ -31,9 +31,11 @@ jobs:
       - name: Build Next.js app
         run: yarn build
 
-      # 5️⃣ Disable Jekyll (required for GitHub Pages)
+      # 5️⃣ Disable Jekyll safely
       - name: Disable Jekyll
-        run: touch out/nextapp/.nojekyll
+        run: |
+          mkdir -p out/nextapp
+          touch out/nextapp/.nojekyll
 
       # 6️⃣ Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
@@ -41,5 +43,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out/nextapp   # ✅ Exported folder with basePath
-          # Optional: custom branch
+          # Optional: use a custom branch
           # publish_branch: gh-pages
