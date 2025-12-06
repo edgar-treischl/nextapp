@@ -1,13 +1,10 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  // Enable static HTML export
-  output: "export",
-  basePath: "/nextapp",
+const dev = process.env.NODE_ENV === "development";
 
-  // You can keep other config options here
-  // Example: basePath if deploying to GitHub Pages subpath
-  // basePath: "/my-repo-name",
+const nextConfig: NextConfig = {
+  output: "export",
+  basePath: dev ? "" : "/nextapp",  // dev: root '/', prod: GitHub Pages subpath
 };
 
 export default nextConfig;
