@@ -1,47 +1,15 @@
-name: Deploy Next.js App to GitHub Pages
+# Create and switch to gh-pages
+git checkout --orphan gh-pages
 
-on:
-  push:
-    branches:
-      - main   # Trigger on main branch push
+# Remove old files (if any)
+git rm -rf .
 
-permissions:
-  contents: write   # Required to push to gh-pages branch
+# Copy the contents of out/
+cp -r out/* .
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+# Add and commit
+git add .
+git commit -m "Deploy Next.js static site"
 
-    steps:
-      # 1️⃣ Checkout code
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # 2️⃣ Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      # 3️⃣ Install dependencies
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      # 4️⃣ Build Next.js app (Static export)
-      - name: Build Next.js app
-        run: yarn build
-
-      # 5️⃣ Disable Jekyll safely
-      - name: Disable Jekyll
-        run: |
-          mkdir -p out/nextapp
-          touch out/nextapp/.nojekyll
-
-      # 6️⃣ Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out/nextapp   # ✅ Exported folder with basePath
-          # Optional: use a custom branch
-          # publish_branch: gh-pages
+# Push to GitHub
+git push origin gh-pages --force
