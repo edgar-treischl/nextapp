@@ -15,6 +15,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             <Link href="/about" className="text-gray-700 hover:text-blue-600">
               About
             </Link>
+            <Link href="/users" className="text-gray-700 hover:text-blue-600">
+              Users
+            </Link>
           </div>
         </nav>
       </header>

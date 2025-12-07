@@ -8,8 +8,8 @@ export default function AboutPage() {
         This is a simple modern website built with Next.js 13 and Tailwind CSS.
         You can use it as a starting point for landing pages, dashboards, or data apps.
       </p>
-      <Link href="/" legacyBehavior>
-        <a className="text-blue-600 hover:underline">← Back to Home</a>
+      <Link href="/" className="text-blue-600 hover:underline">
+        ← Back to Home
       </Link>
     </section>
   )
