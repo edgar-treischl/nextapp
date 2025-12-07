@@ -1,41 +1,63 @@
 // pages/gantt.js
 import { useEffect, useRef, useState } from 'react';
 import HighchartsGantt from 'highcharts/highcharts-gantt';
+import Papa from 'papaparse';
 import Link from 'next/link';
 
 export default function GanttPage() {
   const chartRef = useRef(null);
+  const [seriesData, setSeriesData] = useState([]);
   const [copied, setCopied] = useState(false);
 
-  const seriesData = [{
-    name: 'Project 1',
-    data: [
-      { name: 'Task 1', start: Date.UTC(2023, 0, 1), end: Date.UTC(2023, 2, 1) },
-      { name: 'Task 2', start: Date.UTC(2023, 2, 2), end: Date.UTC(2023, 5, 1) },
-      { name: 'Task 3', start: Date.UTC(2023, 5, 2), end: Date.UTC(2023, 8, 1) },
-    ]
-  }];
-
-  const chartOptions = {
-    title: { text: 'Project Timeline' },
-    xAxis: {
-      currentDateIndicator: true,
-      min: Date.UTC(2023, 0, 1),
-      max: Date.UTC(2023, 11, 31),
-      tickInterval: 1000 * 60 * 60 * 24 * 30
-    },
-    series: seriesData
-  };
-
+  // Load CSV data
   useEffect(() => {
-    if (chartRef.current) {
-      HighchartsGantt.ganttChart(chartRef.current, chartOptions);
-    }
+    fetch('/data/tasks.csv')
+      .then(res => res.text())
+      .then(csvText => {
+        const parsed = Papa.parse(csvText, { header: true }).data;
+        const tasks = parsed.map(row => ({
+          name: row.task,
+          start: new Date(row.start).getTime(),
+          end: new Date(row.end).getTime(),
+        }));
+        setSeriesData([{ name: 'Project 1', data: tasks }]);
+      });
   }, []);
 
-  const codeString = `import HighchartsGantt from 'highcharts/highcharts-gantt';
+  // Render chart when data is ready
+  useEffect(() => {
+    if (chartRef.current && seriesData.length) {
+      const allDates = seriesData[0].data.flatMap(d => [d.start, d.end]);
+      const minDate = Math.min(...allDates) - 24 * 60 * 60 * 1000; // 1 day padding
+      const maxDate = Math.max(...allDates) + 24 * 60 * 60 * 1000;
 
-HighchartsGantt.ganttChart('container', ${JSON.stringify(chartOptions, null, 2)});`;
+      HighchartsGantt.ganttChart(chartRef.current, {
+        title: { text: 'Project Timeline' },
+        xAxis: {
+          currentDateIndicator: true,
+          min: minDate,
+          max: maxDate,
+        },
+        series: seriesData,
+      });
+    }
+  }, [seriesData]);
+
+  const codeString = `import HighchartsGantt from 'highcharts/highcharts-gantt';
+import tasks from './tasks.csv'; // load your CSV
+
+// Convert CSV to Highcharts series
+const seriesData = tasks.map(row => ({
+  name: row.task,
+  start: new Date(row.start).getTime(),
+  end: new Date(row.end).getTime(),
+}));
+
+HighchartsGantt.ganttChart('container', {
+  title: { text: 'Project Timeline' },
+  xAxis: { currentDateIndicator: true },
+  series: [{ name: 'Project 1', data: seriesData }]
+});`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(codeString);
