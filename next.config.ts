@@ -4,7 +4,8 @@ const dev = process.env.NODE_ENV === "development";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: dev ? "" : "/nextapp",  // dev: root '/', prod: GitHub Pages subpath
+  basePath: dev ? "" : "/nextapp",
+  assetPrefix: dev ? "" : "/nextapp/",
 };
 
 export default nextConfig;
