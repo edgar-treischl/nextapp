@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import Image from 'next/image'
+import hero from '../public/hero.jpg'
 
 export default function HomePage() {
   return (
@@ -40,10 +42,10 @@ export default function HomePage() {
 
         {/* Right column: Hero image */}
         <div className="flex-1 flex justify-center lg:justify-end">
-          <img
-            src="/hero.jpg"
-            alt="Hero illustration"
-            className="w-72 md:w-96 lg:w-[400px] rounded-xl shadow-lg"
+          <Image
+          src={hero}
+          alt="Hero illustration"
+          className="mx-auto mt-10 w-64 md:w-96"
           />
         </div>
       </div>
