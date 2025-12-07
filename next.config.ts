@@ -1,13 +1,14 @@
-import type { NextConfig } from "next";
-
 const dev = process.env.NODE_ENV === "development";
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   output: "export",
   basePath: dev ? "" : "/nextapp",
   assetPrefix: dev ? "" : "/nextapp/",
+  env: {
+    NEXT_PUBLIC_BASE_PATH: dev ? "" : "/nextapp", // expose to client
+  },
   images: {
-    unoptimized: true, // disable server-side image optimization
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
