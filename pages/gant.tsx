@@ -1,47 +1,61 @@
+// pages/gantt.tsx
 import { useEffect, useRef, useState } from "react";
-import Highcharts from "highcharts/highcharts-gantt";
+import HighchartsGantt, { SeriesGanttOptions } from "highcharts/highcharts-gantt";
 import Papa from "papaparse";
 import Link from "next/link";
-import type { SeriesGanttOptions } from "highcharts/highcharts-gantt";
+
+interface Task {
+  name: string;
+  start: number;
+  end: number;
+}
 
 export default function GanttPage() {
   const chartRef = useRef<HTMLDivElement>(null);
   const [seriesData, setSeriesData] = useState<SeriesGanttOptions[]>([]);
 
+  // Use environment variable for base path (works in dev & export)
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const csvUrl = `${basePath}/data/tasks.csv`;
+
+  // Load CSV data
   useEffect(() => {
-    fetch("/data/tasks.csv")
-      .then((res) => res.text())
+    fetch(csvUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error(`CSV not found at ${csvUrl}`);
+        return res.text();
+      })
       .then((csvText) => {
         const parsed = Papa.parse(csvText, { header: true }).data as any[];
-        const currentYear = new Date().getFullYear();
 
-        // Map CSV rows to Gantt points
-        const tasks = parsed
+        const tasks: Task[] = parsed
           .filter((row) => row.task && row.start && row.end)
           .map((row) => ({
             name: row.task,
             start: new Date(row.start).getTime(),
             end: new Date(row.end).getTime(),
-          }))
-          .filter((task) => new Date(task.start).getFullYear() >= currentYear);
+          }));
 
-        // Cast to 'any' to satisfy TypeScript
-        setSeriesData([{ type: "gantt", name: "Project 1", data: tasks as any }]);
+        setSeriesData([{ type: "gantt", name: "Project 1", data: tasks }]);
       })
       .catch((err) => console.error("Failed to load CSV:", err));
-  }, []);
+  }, [csvUrl]);
 
+  // Render Gantt chart
   useEffect(() => {
     if (!chartRef.current || !seriesData.length) return;
 
-    const today = Date.now();
-    const threeMonthsAhead = today + 90 * 24 * 60 * 60 * 1000*2;
+    const allDates = seriesData[0].data?.flatMap((d: any) => [d.start, d.end]) || [];
+    if (!allDates.length) return;
 
-    Highcharts.ganttChart(chartRef.current, {
+    const minDate = Math.min(...allDates) - 24 * 60 * 60 * 1000; // 1 day padding
+    const maxDate = Math.max(...allDates) + 24 * 60 * 60 * 1000;
+
+    HighchartsGantt.ganttChart(chartRef.current, {
       chart: { backgroundColor: "transparent" },
       title: { text: "Project Timeline" },
       yAxis: { uniqueNames: true },
-      xAxis: { min: today, max: threeMonthsAhead, currentDateIndicator: false },
+      xAxis: { min: minDate, max: maxDate, currentDateIndicator: true },
       navigator: { enabled: true },
       scrollbar: { enabled: true },
       series: seriesData,
@@ -64,7 +78,7 @@ export default function GanttPage() {
       </div>
 
       <div className="mt-10 text-center">
-        <Link href="/" className="text-blue-600 hover:underline font-medium">
+        <Link href={`${basePath}/`} className="text-blue-600 hover:underline font-medium">
           ← Back to Home
         </Link>
       </div>
