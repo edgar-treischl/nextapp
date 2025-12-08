@@ -78,10 +78,11 @@ export default function GanttPage() {
       </div>
 
       <div className="mt-10 text-center">
-        <Link href={`${basePath}/`} className="text-blue-600 hover:underline font-medium">
+        <Link href="/" className="text-blue-600 hover:underline">
           ← Back to Home
         </Link>
       </div>
+    
     </section>
   );
 }

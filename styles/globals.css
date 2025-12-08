@@ -5,3 +5,12 @@
 body {
   @apply bg-gray-50 font-sans;
 }
+
+.nav-link {
+  @apply text-gray-700 hover:text-blue-600 transition-colors;
+}
+
+.dropdown-item {
+  @apply block px-4 py-2 text-gray-700 hover:bg-gray-100;
+}
+
