@@ -242,18 +242,6 @@
   resolved "https://registry.npmjs.org/@img/colour/-/colour-1.0.0.tgz"
   integrity sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==
 
-"@img/sharp-darwin-arm64@0.34.5":
-  version "0.34.5"
-  resolved "https://registry.npmjs.org/@img/sharp-darwin-arm64/-/sharp-darwin-arm64-0.34.5.tgz"
-  integrity sha512-imtQ3WMJXbMY4fxb/Ndp6HBTNVtWCUI0WdobyheGf5+ad6xX8VIDO8u2xE4qc/fr08CKG/7dDseFtn6M6g/r3w==
-  optionalDependencies:
-    "@img/sharp-libvips-darwin-arm64" "1.2.4"
-
-"@img/sharp-libvips-darwin-arm64@1.2.4":
-  version "1.2.4"
-  resolved "https://registry.npmjs.org/@img/sharp-libvips-darwin-arm64/-/sharp-libvips-darwin-arm64-1.2.4.tgz"
-  integrity sha512-zqjjo7RatFfFoP0MkQ51jfuFZBnVE2pRiaydKJ1G/rHZvnsrHAOcQALIi9sA5co5xenQdTugCvtb1cuf78Vf4g==
-
 "@jridgewell/gen-mapping@^0.3.12", "@jridgewell/gen-mapping@^0.3.2", "@jridgewell/gen-mapping@^0.3.5":
   version "0.3.13"
   resolved "https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.3.13.tgz"
@@ -305,10 +293,15 @@
   dependencies:
     fast-glob "3.3.1"
 
-"@next/swc-darwin-arm64@16.1.0-canary.15":
+"@next/swc-linux-x64-gnu@16.1.0-canary.15":
   version "16.1.0-canary.15"
-  resolved "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-16.1.0-canary.15.tgz"
-  integrity sha512-Dgm5yEfpc3c3LqewZWu5PgAF5SwtdQn1z6DFnU14qvoJodbYIsc5iZshjn3QUJL8nTyl/TUysarOAN4CabcOVQ==
+  resolved "https://registry.npmjs.org/@next/swc-linux-x64-gnu/-/swc-linux-x64-gnu-16.1.0-canary.15.tgz"
+  integrity sha512-1Inr+RRJ4sNfnAcRDLzWqv6zmEwwfnKE1yru/SjBVyun4WuKZ1MhjK0JjFYzSM8Ci0OyP1ApjD5JoWCdq2Majw==
+
+"@next/swc-linux-x64-musl@16.1.0-canary.15":
+  version "16.1.0-canary.15"
+  resolved "https://registry.npmjs.org/@next/swc-linux-x64-musl/-/swc-linux-x64-musl-16.1.0-canary.15.tgz"
+  integrity sha512-GMPO7GYJKL9z6++7Bd7lB+7xTlsAhjmsJUV1yzcyUH3/8N0kPolF9wSwcjVbancrI5pI97V7kaSC4bf21NqOtg==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -360,11 +353,6 @@
     magic-string "^0.30.21"
     source-map-js "^1.2.1"
     tailwindcss "4.1.17"
-
-"@tailwindcss/oxide-darwin-arm64@4.1.17":
-  version "4.1.17"
-  resolved "https://registry.npmjs.org/@tailwindcss/oxide-darwin-arm64/-/oxide-darwin-arm64-4.1.17.tgz"
-  integrity sha512-EquyumkQweUBNk1zGEU/wfZo2qkp/nQKRZM8bUYO0J+Lums5+wl2CcG1f9BgAjn/u9pJzdYddHWBiFXJTcxmOg==
 
 "@tailwindcss/oxide@4.1.17":
   version "4.1.17"
@@ -532,11 +520,6 @@
   dependencies:
     "@typescript-eslint/types" "8.48.1"
     eslint-visitor-keys "^4.2.1"
-
-"@unrs/resolver-binding-darwin-arm64@1.11.1":
-  version "1.11.1"
-  resolved "https://registry.npmjs.org/@unrs/resolver-binding-darwin-arm64/-/resolver-binding-darwin-arm64-1.11.1.tgz"
-  integrity sha512-gPVA1UjRu1Y/IsB/dQEsp2V1pm44Of6+LWvbLc9SDk1c2KhhDRDBUkQCYVWe6f26uJb3fOK8saWMgtX8IrMk3g==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
@@ -1535,11 +1518,6 @@ fs-extra@^11.1.1:
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
-fsevents@~2.3.2:
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
-  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
-
 function-bind@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz"
@@ -2094,11 +2072,6 @@ levn@^0.4.1:
   dependencies:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
-
-lightningcss-darwin-arm64@1.30.2:
-  version "1.30.2"
-  resolved "https://registry.npmjs.org/lightningcss-darwin-arm64/-/lightningcss-darwin-arm64-1.30.2.tgz"
-  integrity sha512-ylTcDJBN3Hp21TdhRT5zBOIi73P6/W0qwvlFEk22fkdXchtNTOU4Qc37SkzV+EKYxLouZ6M4LG9NfZ1qkhhBWA==
 
 lightningcss@1.30.2:
   version "1.30.2"
