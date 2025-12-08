@@ -48,14 +48,14 @@ export default function GanttPage() {
     const allDates = seriesData[0].data?.flatMap((d: any) => [d.start, d.end]) || [];
     if (!allDates.length) return;
 
-    const minDate = Math.min(...allDates) - 24 * 60 * 60 * 1000; // 1 day padding
-    const maxDate = Math.max(...allDates) + 24 * 60 * 60 * 1000;
+    const today = Date.now();
+    const sixMonthsAhead = today + 90 * 24 * 60 * 60 * 1000*2;
 
     HighchartsGantt.ganttChart(chartRef.current, {
       chart: { backgroundColor: "transparent" },
       title: { text: "Project Timeline" },
       yAxis: { uniqueNames: true },
-      xAxis: { min: minDate, max: maxDate, currentDateIndicator: true },
+      xAxis: { currentDateIndicator: false, min: today, max: sixMonthsAhead },
       navigator: { enabled: true },
       scrollbar: { enabled: true },
       series: seriesData,
