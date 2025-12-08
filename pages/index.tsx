@@ -37,6 +37,12 @@ export default function HomePage() {
             >
               Charts
             </Link>
+            <Link
+              href="/scatter"
+              className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600 transition"
+            >
+              Scatter Plot
+            </Link>
           </div>
         </div>
 
