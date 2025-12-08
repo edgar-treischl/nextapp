@@ -4,14 +4,13 @@ import {
   Chart as ChartJS,
   LinearScale,
   PointElement,
-  LineElement,
   Title,
   Tooltip,
   Legend,
 } from 'chart.js'
 import Link from 'next/link'
 
-ChartJS.register(LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
+ChartJS.register(LinearScale, PointElement, Title, Tooltip, Legend)
 
 export default function ScatterPage() {
   const [data, setData] = useState({
