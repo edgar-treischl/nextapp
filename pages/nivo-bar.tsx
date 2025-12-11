@@ -49,11 +49,11 @@ export default function NivoInteractiveChart() {
               keys={['sales']}
               indexBy="month"
               margin={{ top: 50, right: 40, bottom: 60, left: 60 }}
-              padding={0.3}
+              padding={0.2}
               colors={({ id, data: d }) =>
                 hoveredMonth === d.month ? '#052784ff' : '#3B82F6' // darker on hover
               }
-              borderRadius={6}
+              borderRadius={3}
               enableLabel={true}
               /*labelTextColor={{ from: 'color', modifiers: [['brighter', 3]] }} // or white */
               labelTextColor="#fff"

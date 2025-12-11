@@ -67,7 +67,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                   </Link>
 
                   <Link
-                    href="/nivo-bar"
+                    href="/nivo-tree"
                     className="dropdown-item"
                     onClick={() => setOpen(false)}
                   >
