@@ -67,11 +67,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                   </Link>
 
                   <Link
-                    href="/gant"
+                    href="/nivo-bar"
                     className="dropdown-item"
                     onClick={() => setOpen(false)}
                   >
-                    Gant
+                    Nivo
                   </Link>
 
                   <Link
