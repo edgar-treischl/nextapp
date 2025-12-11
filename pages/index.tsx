@@ -16,32 +16,19 @@ export default function HomePage() {
           </h1>
           <p className="text-lg md:text-2xl text-blue-800">
             A modern, simple site built with Next.js and Tailwind CSS.
-            Perfect for landing pages, dashboards, or small projects.
           </p>
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
             <Link
-              href="/about"
+              href="/charts"
               className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition"
             >
-              Learn More
+              Charts.js
             </Link>
             <Link
-              href="/users"
-              className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50 transition"
-            >
-              Users Example
-            </Link>
-            <Link
-              href="/charts"
+              href="/nivo-bar"
               className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600 transition"
             >
-              Charts
-            </Link>
-            <Link
-              href="/scatter"
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600 transition"
-            >
-              Scatter Plot
+              Nivo.js
             </Link>
           </div>
         </div>
