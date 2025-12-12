@@ -12,7 +12,7 @@ export default function HomePage() {
         {/* Left column: Text */}
         <div className="flex-1 text-center lg:text-left space-y-6">
           <h1 className="text-4xl md:text-6xl font-extrabold text-blue-900 leading-tight">
-            Welcome to this Example Vis Website
+            Welcome to this Example Website GitHub A
           </h1>
           <p className="text-lg md:text-2xl text-blue-800">
             A modern, simple site built with Next.js and Tailwind CSS.
