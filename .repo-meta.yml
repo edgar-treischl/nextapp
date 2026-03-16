@@ -1,0 +1,19 @@
+name: nextapp
+description: Test Next.js App
+dev_path: wip
+role: project
+status: experimental
+tags:
+  - frontend
+language: JS
+setup:
+env:
+  - .env.example
+services:
+  - postgres
+  - redis
+depends_on:
+  - my-core-lib
+workspace: []
+update_strategy: []
+priority: []
