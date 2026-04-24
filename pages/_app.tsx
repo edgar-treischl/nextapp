@@ -57,10 +57,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 </svg>
               </button>
 
-              {openNivo && (
-                <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg py-2 z-50">
+               {openNivo && (
+                <div className="absolute right-0 mt-2 w-44 bg-white border rounded-md shadow-lg py-2 z-50">
                   <Link href="/nivo-tree" className="dropdown-item">Tree</Link>
                   <Link href="/nivo-bar" className="dropdown-item">Bar</Link>
+                  <Link href="/nivo-stufen" className="dropdown-item">Stacked Bar</Link>
                 </div>
               )}
             </div>
