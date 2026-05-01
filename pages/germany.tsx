@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 // Use relative path for TopoJSON - Next.js will resolve it from public folder
-const GERMANY_TOPO_JSON = "/germany-states.json";
+const GERMANY_TOPO_JSON = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/germany-states.json`;
 
 // Example data for German federal states (Bundesländer)
 const stateData: Record<string, { name: string; value: number }> = {
