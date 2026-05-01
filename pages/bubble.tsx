@@ -7,11 +7,20 @@ import {
   Tooltip,
   Legend,
   Title,
+  ChartOptions,
 } from 'chart.js'
 
 import gapminder from '@/data/gapminder.json'
 
 ChartJS.register(LinearScale, PointElement, Tooltip, Legend, Title)
+
+// 👇 extend bubble point to include country
+type BubblePoint = {
+  x: number
+  y: number
+  r: number
+  country: string
+}
 
 export default function BubblePage() {
   const year = 2007
@@ -27,7 +36,6 @@ export default function BubblePage() {
       Oceania: 'rgba(168, 85, 247, 0.6)',
     }
 
-    // 👇 adjusted scaling so bubbles are clearly visible
     const scalePop = (pop: number) => Math.sqrt(pop) / 1200
 
     return {
@@ -35,36 +43,40 @@ export default function BubblePage() {
         label: continent,
         data: filtered
           .filter((d) => d.continent === continent)
-          .map((d) => ({
-            x: d.gdpPercap,
-            y: d.lifeExp,
-            r: scalePop(d.pop),
-            country: d.country, // ✅ important for tooltip
-          })),
+          .map(
+            (d): BubblePoint => ({
+              x: d.gdpPercap,
+              y: d.lifeExp,
+              r: scalePop(d.pop),
+              country: d.country,
+            })
+          ),
         backgroundColor: colors[continent],
         borderWidth: 1,
       })),
     }
   }, [])
 
-  const options = {
+  const options: ChartOptions<'bubble'> = {
     responsive: true,
     plugins: {
-      legend: { position: 'top' as const },
+      legend: { position: 'top' },
       title: {
         display: true,
         text: 'Gapminder Bubble Chart (2007)',
       },
       tooltip: {
         callbacks: {
-          label: (ctx: any) => {
-            const d = ctx.raw
+          label: (ctx) => {
+            const d = ctx.raw as BubblePoint
 
             return [
               `Country: ${d.country}`,
               `GDP per Capita: $${Math.round(d.x)}`,
               `Life Expectancy: ${d.y} yrs`,
-              `Population: ${Math.round(d.r * d.r * 1200 * 1200)}`,
+              `Population: ${Math.round(
+                Math.pow(d.r * 1200, 2)
+              )}`,
             ]
           },
         },
