@@ -65,7 +65,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
               {openChart && (
                 <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg py-2 z-50">
+                  <Link href="/area" className="dropdown-item">-area</Link>
+                  <Link href="/bubble" className="dropdown-item">-bubble</Link>
                   <Link href="/charts" className="dropdown-item">-bar</Link>
+                  <Link href="/radar" className="dropdown-item">-radar</Link>
                   <Link href="/scatter" className="dropdown-item">-scatter</Link>
                 </div>
               )}
