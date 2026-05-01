@@ -17,20 +17,6 @@ export default function HomePage() {
           <p className="text-lg md:text-2xl text-blue-800">
             A modern, simple site built with Next.js and Tailwind CSS.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-            <Link
-              href="/charts"
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition"
-            >
-              Charts.js
-            </Link>
-            <Link
-              href="/nivo-bar"
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600 transition"
-            >
-              Nivo.js
-            </Link>
-          </div>
         </div>
 
         {/* Right column: Hero image */}
