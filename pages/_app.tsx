@@ -96,6 +96,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             </div>
             <Link href="/users" className="nav-link">Users</Link>
             <Link href="/gant" className="nav-link">Gant</Link>
+            <Link href="/germany" className="nav-link">Germany</Link>
 
           </div>
         </nav>
