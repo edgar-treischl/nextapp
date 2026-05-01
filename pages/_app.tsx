@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [openNivo, setOpenNivo] = useState(false)
   const [openChart, setOpenChart] = useState(false)
+  const [openMaps, setOpenMaps] = useState(false)
   const router = useRouter()
 
   // Close dropdowns on route change
@@ -15,6 +16,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     const closeMenus = () => {
       setOpenNivo(false)
       setOpenChart(false)
+      setOpenMaps(false)
     }
     router.events.on('routeChangeStart', closeMenus)
     return () => router.events.off('routeChangeStart', closeMenus)
@@ -36,12 +38,43 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             <Link href="/" className="nav-link">Home</Link>
             <Link href="/about" className="nav-link">About</Link>
 
+            {/* Maps Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => {
+                  setOpenMaps(prev => !prev)
+                  setOpenNivo(false)
+                  setOpenChart(false)
+                }}
+                className="nav-link flex items-center"
+                aria-expanded={openMaps}
+              >
+                Maps
+                <svg
+                  className={`ml-1 w-4 h-4 transition-transform ${openMaps ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+               {openMaps && (
+                <div className="absolute right-0 mt-2 w-44 bg-white border rounded-md shadow-lg py-2 z-50">
+                  <Link href="/germany" className="dropdown-item">Germany</Link>
+                  <Link href="/bavaria" className="dropdown-item">Bavaria</Link>
+                </div>
+              )}
+            </div>
+
             {/* Nivo Dropdown */}
             <div className="relative">
               <button
                 onClick={() => {
                   setOpenNivo(prev => !prev)
                   setOpenChart(false)
+                  setOpenMaps(false)
                 }}
                 className="nav-link flex items-center"
                 aria-expanded={openNivo}
@@ -72,6 +105,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 onClick={() => {
                   setOpenChart(prev => !prev)
                   setOpenNivo(false)
+                  setOpenMaps(false)
                 }}
                 className="nav-link flex items-center"
                 aria-expanded={openChart}
@@ -96,7 +130,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             </div>
             <Link href="/users" className="nav-link">Users</Link>
             <Link href="/gant" className="nav-link">Gant</Link>
-            <Link href="/germany" className="nav-link">Germany</Link>
 
           </div>
         </nav>
