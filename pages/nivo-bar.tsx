@@ -34,104 +34,101 @@ export default function NivoInteractiveChart() {
   }
 
   return (
-    <section className="container mx-auto py-20 px-6">
-      <h2 className="text-4xl font-bold mb-12 text-center">
-        Interactive Nivo Bar Chart with Hover
-      </h2>
+    <div className="min-h-screen bg-gray-50 p-4">
+      <div className="max-w-[1800px] mx-auto">
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">Nivo Bar Chart</h1>
+        <p className="text-gray-600 mb-6">
+          Interactive bar chart with hover effects using Nivo
+        </p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          {/* Chart Section - Takes up 2/3 of the space */}
+          <div className="xl:col-span-2 bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-2xl font-semibold mb-4">Monthly Sales Data</h2>
+            <div style={{ height: 500 }}>
+              <ResponsiveBar
+                data={data}
+                keys={['sales']}
+                indexBy="month"
+                margin={{ top: 50, right: 40, bottom: 60, left: 60 }}
+                padding={0.2}
+                colors={({ id, data: d }) =>
+                  hoveredMonth === d.month ? '#052784ff' : '#3B82F6'
+                }
+                borderRadius={3}
+                enableLabel={true}
+                labelTextColor="#fff"
+                animate={true}
+                motionConfig="gentle"
+                onMouseEnter={(bar) => setHoveredMonth(bar.data.month)}
+                onMouseLeave={() => setHoveredMonth(null)}
+                tooltip={({ id, value, indexValue }) => (
+                  <div
+                    style={{
+                      padding: '6px 12px',
+                      background: '#fff',
+                      color: '#000',
+                      borderRadius: 4,
+                      border: '1px solid #ccc',
+                      boxShadow: '0 2px 6px rgba(0,0,0,0.1)',        
+                    }}
+                  >
+                    {id} in {indexValue}: {value}
+                  </div>
+                )}
+                axisBottom={{
+                  tickRotation: -30,
+                  legend: 'Month',
+                  legendOffset: 40,
+                }}
+                axisLeft={{
+                  legend: 'Sales',
+                  legendOffset: -50,
+                }}
+                theme={{
+                  axis: {
+                    ticks: { text: { fontSize: 12 } },
+                    legend: { text: { fontSize: 14 } },
+                  },
+                }}
+              />
+            </div>
+          </div>
 
-        {/* Chart */}
-        <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <div style={{ height: 400 }}>
-            <ResponsiveBar
-              data={data}
-              keys={['sales']}
-              indexBy="month"
-              margin={{ top: 50, right: 40, bottom: 60, left: 60 }}
-              padding={0.2}
-              colors={({ id, data: d }) =>
-                hoveredMonth === d.month ? '#052784ff' : '#3B82F6' // darker on hover
-              }
-              borderRadius={3}
-              enableLabel={true}
-              /*labelTextColor={{ from: 'color', modifiers: [['brighter', 3]] }} // or white */
-              labelTextColor="#fff"
-              animate={true}
-              motionConfig="gentle"
-              onMouseEnter={(bar) => setHoveredMonth(bar.data.month)}
-              onMouseLeave={() => setHoveredMonth(null)}
-              tooltip={({ id, value, indexValue }) => (
-                <div
-                  style={{
-                    padding: '6px 12px',
-                    background: '#fff',
-                    color: '#000',
-                    borderRadius: 4,
-                    border: '1px solid #ccc',
-                    boxShadow: '0 2px 6px rgba(0,0,0,0.1)',        
-                  }}
-                >
-                  {id} in {indexValue}: {value}
-                </div>
-              )}
-              axisBottom={{
-                tickRotation: -30,
-                legend: 'Month',
-                legendOffset: 40,
-              }}
-              axisLeft={{
-                legend: 'Sales',
-                legendOffset: -50,
-              }}
-              theme={{
-                axis: {
-                  ticks: { text: { fontSize: 12 } },
-                  legend: { text: { fontSize: 14 } },
-                },
-              }}
-            />
+          {/* Code Section - Takes up 1/3 of the space */}
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">Example Code</h2>
+              <button
+                onClick={copyToClipboard}
+                className="px-3 py-1.5 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors"
+              >
+                {copied ? 'Copied!' : 'Copy'}
+              </button>
+            </div>
+            <pre className="bg-gray-900 text-gray-100 p-4 rounded overflow-x-auto text-xs">
+              <code>{chartCode}</code>
+            </pre>
           </div>
         </div>
-
-        {/* Code panel */}
-        <div className="relative bg-white p-6 rounded-xl shadow hover:shadow-lg transition overflow-x-auto">
-          <button
-            onClick={copyToClipboard}
-            className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition text-sm"
-          >
-            Copy
-          </button>
-          {copied && (
-            <span className="absolute top-4 right-20 bg-green-500 text-white px-3 py-1 rounded text-sm animate-fade">
-              Copied!
-            </span>
-          )}
-          <h3 className="text-xl font-semibold mb-4">Code Example (Nivo)</h3>
-          <pre className="text-sm text-gray-800 whitespace-pre">
-            <code>{chartCode}</code>
-          </pre>
-        </div>
       </div>
 
-      <div className="mt-10 text-center">
-        <Link href="/" className="text-blue-600 hover:underline">
-          ← Back to Home
-        </Link>
-      </div>
-
-      {/* Tailwind fade animation */}
       <style jsx>{`
-        @keyframes fade {
-          0% { opacity: 0; transform: translateY(-5px); }
-          10% { opacity: 1; transform: translateY(0); }
-          90% { opacity: 1; transform: translateY(0); }
-          100% { opacity: 0; transform: translateY(-5px); }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
-        .animate-fade {
-          animation: fade 2s ease-in-out forwards;
+        
+        .bg-white {
+          animation: fadeIn 0.5s ease-out;
         }
       `}</style>
-    </section>
+    </div>
   )
 }
