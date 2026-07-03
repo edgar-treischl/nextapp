@@ -102,6 +102,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 <div className="absolute right-0 mt-2 w-44 bg-white border rounded-md shadow-lg py-2 z-50">
                   <Link href="/germany" className="dropdown-item">Germany</Link>
                   <Link href="/bavaria" className="dropdown-item">Bavaria</Link>
+                  <Link href="/regierungsbezirke" className="dropdown-item">Regierungsbezirke</Link>
                 </div>
               )}
             </div>
