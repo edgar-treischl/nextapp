@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
-// Use the Regierungsbezirke TopoJSON file
-const REGIERUNGSBEZIRKE_TOPOJSON = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/bavaria-regierungsbezirke.topojson`;
+// Use the dissolved Regierungsbezirke TopoJSON file (internal boundaries removed, single shape per region)
+const REGIERUNGSBEZIRKE_TOPOJSON = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/bavaria-regierungsbezirke-dissolved.topojson`;
 
 const bezirkData = {
   "Oberbayern": 92,
@@ -50,7 +50,7 @@ const getColor = (value: number) => {
   }}
 >
   <Geographies 
-    geography="/bavaria-regierungsbezirke.topojson"
+    geography="/bavaria-regierungsbezirke-dissolved.topojson"
   >
     {({ geographies }) =>
       geographies.map((geo) => {
